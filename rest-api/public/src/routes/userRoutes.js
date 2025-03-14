@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const usersController = require('../controllers/usersController');
+const authMiddleware = require("../middlewares/authMiddleware");
 
 /**
  * @swagger
@@ -21,7 +22,7 @@ const usersController = require('../controllers/usersController');
  *       500:
  *         description: Server error
  */
-router.get('/', usersController.getUsers);
+router.get('/', authMiddleware, usersController.getUsers);
 
 /**
  * @swagger
@@ -61,7 +62,7 @@ router.get('/', usersController.getUsers);
  *       500:
  *         description: Server error
  */
-router.post('/', usersController.addUser);
+router.post('/', authMiddleware, usersController.addUser);
 
 /**
  * @swagger
@@ -100,7 +101,7 @@ router.post('/', usersController.addUser);
  *       500:
  *         description: Server error
  */
-router.put('/:username', usersController.updateUser);
+router.put('/:username', authMiddleware, usersController.updateUser);
 
 /**
  * @swagger
@@ -123,6 +124,6 @@ router.put('/:username', usersController.updateUser);
  *       500:
  *         description: Server error
  */
-router.delete('/:username', usersController.deleteUser);
+router.delete('/:username', authMiddleware, usersController.deleteUser);
 
 module.exports = router;

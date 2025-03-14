@@ -1,6 +1,5 @@
 const User = require('../models/User');
 
-// Get all users (com informações de profile e orders)
 exports.getUsers = async (req, res) => {
     try {
         const users = await User.find().populate('profile').populate('orders');
@@ -11,7 +10,6 @@ exports.getUsers = async (req, res) => {
     }
 };
 
-// Add a new user (alternative to signup via authController)
 exports.addUser = async (req, res) => {
     const { username, name, cpf, email, password } = req.body;
 
@@ -30,7 +28,6 @@ exports.addUser = async (req, res) => {
     }
 };
 
-// Update an existing user
 exports.updateUser = async (req, res) => {
     const username = req.params.username;
     const updatedData = req.body;
@@ -47,7 +44,6 @@ exports.updateUser = async (req, res) => {
     }
 };
 
-// Delete a user
 exports.deleteUser = async (req, res) => {
     const username = req.params.username;
 

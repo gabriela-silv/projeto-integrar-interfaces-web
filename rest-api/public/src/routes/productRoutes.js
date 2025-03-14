@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const productsController = require('../controllers/productsController');
+const authMiddleware = require('../middlewares/authMiddleware');
+
 
 /**
  * @swagger
@@ -21,7 +23,7 @@ const productsController = require('../controllers/productsController');
  *       500:
  *         description: Server error
  */
-router.get('/', productsController.getProducts);
+router.get('/', authMiddleware, productsController.getProducts);
 
 /**
  * @swagger
@@ -44,7 +46,7 @@ router.get('/', productsController.getProducts);
  *       500:
  *         description: Server error
  */
-router.get('/:productCode', productsController.getProductByCode);
+router.get('/:productCode', authMiddleware, productsController.getProductByCode);
 
 /**
  * @swagger
@@ -88,7 +90,7 @@ router.get('/:productCode', productsController.getProductByCode);
  *       500:
  *         description: Server error
  */
-router.post('/', productsController.addProduct);
+router.post('/', authMiddleware, productsController.addProduct);
 
 /**
  * @swagger
@@ -131,7 +133,7 @@ router.post('/', productsController.addProduct);
  *       500:
  *         description: Server error
  */
-router.put('/:productCode', productsController.updateProduct);
+router.put('/:productCode', authMiddleware, productsController.updateProduct);
 
 /**
  * @swagger
@@ -154,7 +156,7 @@ router.put('/:productCode', productsController.updateProduct);
  *       500:
  *         description: Server error
  */
-router.delete('/:productCode', productsController.deleteProduct);
+router.delete('/:productCode', authMiddleware, productsController.deleteProduct);
 
 /**
  * @swagger
@@ -185,6 +187,6 @@ router.delete('/:productCode', productsController.deleteProduct);
  *       500:
  *         description: Server error
  */
-router.post('/apply-discount', productsController.applyDiscount);
+router.post('/apply-discount', authMiddleware, productsController.applyDiscount);
 
 module.exports = router;

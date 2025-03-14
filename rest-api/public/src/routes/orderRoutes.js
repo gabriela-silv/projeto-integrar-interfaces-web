@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const ordersController = require('../controllers/ordersController');
+const authMiddleware = require('../middlewares/authMiddleware');
+
 
 /**
  * @swagger
@@ -21,7 +23,7 @@ const ordersController = require('../controllers/ordersController');
  *       500:
  *         description: Server error
  */
-router.get('/', ordersController.getOrders);
+router.get('/', authMiddleware, ordersController.getOrders);
 
 /**
  * @swagger
@@ -44,7 +46,7 @@ router.get('/', ordersController.getOrders);
  *       500:
  *         description: Server error
  */
-router.get('/:id', ordersController.getOrderById);
+router.get('/:id', authMiddleware, ordersController.getOrderById);
 
 /**
  * @swagger
@@ -77,6 +79,6 @@ router.get('/:id', ordersController.getOrderById);
  *       500:
  *         description: Server error
  */
-router.post('/', ordersController.createOrder);
+router.post('/', authMiddleware, ordersController.createOrder);
 
 module.exports = router;

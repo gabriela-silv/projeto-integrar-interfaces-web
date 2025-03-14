@@ -1,7 +1,6 @@
 const Profile = require('../models/Profile');
 const User = require('../models/User');
 
-// Update profile image
 exports.updateProfileImage = async (req, res) => {
   const { userId, image } = req.body;
 
@@ -10,10 +9,8 @@ exports.updateProfileImage = async (req, res) => {
   }
 
   try {
-    // Busca o profile do usuário
     let profile = await Profile.findOne({ user: userId });
     if (!profile) {
-      // Se não existir, cria um novo
       profile = new Profile({ user: userId, profileImage: image });
     } else {
       profile.profileImage = image;
@@ -21,7 +18,6 @@ exports.updateProfileImage = async (req, res) => {
 
     await profile.save();
 
-    // Garante que a referência do profile esteja no usuário
     const user = await User.findById(userId);
     if (user && !user.profile) {
       user.profile = profile._id;
@@ -35,7 +31,6 @@ exports.updateProfileImage = async (req, res) => {
   }
 };
 
-// Update additional profile information
 exports.updateProfile = async (req, res) => {
   const { userId, address, phone } = req.body;
 
@@ -50,7 +45,6 @@ exports.updateProfile = async (req, res) => {
 
     await profile.save();
 
-    // Garante que a referência do profile esteja no usuário
     const user = await User.findById(userId);
     if (user && !user.profile) {
       user.profile = profile._id;

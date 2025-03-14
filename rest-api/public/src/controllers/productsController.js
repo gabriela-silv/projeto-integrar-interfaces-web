@@ -1,6 +1,5 @@
 const Product = require('../models/Product');
 
-// Get all products
 exports.getProducts = async (req, res) => {
     try {
         const products = await Product.find();
@@ -10,7 +9,6 @@ exports.getProducts = async (req, res) => {
     }
 };
 
-// Get product by productCode
 exports.getProductByCode = async (req, res) => {
     const { productCode } = req.params;
 
@@ -25,7 +23,6 @@ exports.getProductByCode = async (req, res) => {
     }
 };
 
-// Add a new product
 exports.addProduct = async (req, res) => {
     const newProduct = req.body;
 
@@ -38,7 +35,6 @@ exports.addProduct = async (req, res) => {
     }
 };
 
-// Update product by productCode
 exports.updateProduct = async (req, res) => {
     const { productCode } = req.params;
     const updatedData = req.body;
@@ -54,7 +50,6 @@ exports.updateProduct = async (req, res) => {
     }
 };
 
-// Delete a product by productCode
 exports.deleteProduct = async (req, res) => {
     const { productCode } = req.params;
 
@@ -69,7 +64,6 @@ exports.deleteProduct = async (req, res) => {
     }
 };
 
-// Apply discount to a product
 exports.applyDiscount = async (req, res) => {
     const { discountCode, productCode } = req.body;
 
@@ -79,9 +73,8 @@ exports.applyDiscount = async (req, res) => {
             return res.status(404).json({ message: 'Product not found' });
         }
 
-        // Exemplo de lógica de desconto
         if (discountCode === 'DISCOUNT10') {
-            product.currentPrice *= 0.9; // Aplica 10% de desconto
+            product.currentPrice *= 0.9;
             await product.save();
             return res.json({ message: 'Discount applied successfully', product });
         } else {

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const profileController = require('../controllers/profileController');
+const authMiddleware = require("../middlewares/authMiddleware");
 
 /**
  * @swagger
@@ -38,7 +39,7 @@ const profileController = require('../controllers/profileController');
  *       500:
  *         description: Server error
  */
-router.post('/update-image', profileController.updateProfileImage);
+router.post('/update-image', authMiddleware, profileController.updateProfileImage);
 
 /**
  * @swagger
@@ -68,6 +69,6 @@ router.post('/update-image', profileController.updateProfileImage);
  *       500:
  *         description: Server error
  */
-router.post('/update', profileController.updateProfile);
+router.post('/update', authMiddleware, profileController.updateProfile);
 
 module.exports = router;

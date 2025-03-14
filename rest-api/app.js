@@ -37,16 +37,29 @@ const swaggerOptions = {
     },
     servers: [
       { url: 'http://localhost:3000' }
-    ]
+    ],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
+    },
+    security: [
+      {
+        bearerAuth: []
+      }
+    ],
   },
-  // Caminhos dos arquivos onde os comentários do Swagger serão lidos
   apis: ['./public/src/routes/*.js', './public/src/controllers/*.js'],
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-// Definição das rotas
+
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
