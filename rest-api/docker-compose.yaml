@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: click-and-buy-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: clickandbuy
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
