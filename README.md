@@ -18,11 +18,6 @@
    ```bash
    npm install
    ```
-
-3. **Configuration:**
-    - (Optional) Create a `.env` file in the root directory.
-    - Define `MONGO_URI` in the `.env` file if you want to override the default MongoDB connection string (`mongodb://127.0.0.1:27017/clickAndBuy`).
-
 ## Running MongoDB with Docker Compose
 
 A `docker-compose.yaml` file is provided to run a MongoDB container for testing purposes. To start the MongoDB container, run:
