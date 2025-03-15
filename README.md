@@ -10,8 +10,8 @@
 
 1. **Clone the Repository:**
    ```bash
-   git clone <repository_url>
-   cd click-and-buy-api
+   git clone https://github.com/gabriela-silv/projeto-integrar-interfaces-web.git
+   cd projeto-integrar-interfaces-web
    ```
 
 2. **Install Dependencies:**
@@ -33,6 +33,14 @@ docker-compose up -d
 
 - The MongoDB container will be available at `mongodb://127.0.0.1:27017`.
 - It uses a volume named `mongo-data` for data persistence.
+
+## Setting up the environment variables 
+
+- Create a **.env** file on the root of the rest-api project and insert the following values
+```env
+PORT=3000
+JWT_SECRET=YourJwtSecretHere
+```
 
 ## Running the Application
 
